@@ -3,5 +3,5 @@
 - docker-compose up -d
 
 ### test app
-- mvn clean install -Dspring.profiles.active=test
+- mvn clean test
 

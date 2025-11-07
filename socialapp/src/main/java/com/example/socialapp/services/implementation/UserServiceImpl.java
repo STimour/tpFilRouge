@@ -30,7 +30,7 @@ public class UserServiceImpl implements IUserService {
      * @throws IllegalArgumentException si le nom d'utilisateur (username) est déjà utilisé.
      */
     @Override
-    public User register(UserDto dto) {
+    public boolean register(UserDto dto) {
         // Vérifie si le username est déjà pris
         if (userRepository.existsByUsername(dto.getUsername())) {
             throw new IllegalArgumentException("Username already exists");
@@ -42,20 +42,17 @@ public class UserServiceImpl implements IUserService {
                 .password(passwordEncoder.encode(dto.getPassword()))
                 .build();
                 
-                User saved = userRepository.save(user);
-
-                // Vérification basique : save doit retourner une entité non nulle et avec un id généré
-                if (saved == null || saved.getId() == null) {
-                    throw new IllegalStateException("Échec de l'enregistrement de l'utilisateur");
-                }
-
-                // Optionnel : double-vérification via le repository
-                if (!userRepository.existsById(saved.getId())) {
-                    throw new IllegalStateException("L'utilisateur n'a pas été persisté en base");
-                }
-
-                // Ne pas retourner le mot de passe dans l'objet renvoyé
-                saved.setPassword(null);
-                return saved;
+        User saved = userRepository.save(user);
+        // Vérification basique : save doit retourner une entité non nulle et avec un id généré
+        if (saved == null || saved.getId() == null) {
+            throw new IllegalStateException("Échec de l'enregistrement de l'utilisateur");
+        }
+        
+        // Optionnel : double-vérification via le repository
+        if (!userRepository.existsById(saved.getId())) {
+            throw new IllegalStateException("L'utilisateur n'a pas été persisté en base");
+        }
+        
+        return true;
     }
 }

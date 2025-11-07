@@ -4,9 +4,12 @@ import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.socialapp.dto.UserDto;
 import com.example.socialapp.entity.User;
@@ -26,8 +29,11 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@Valid @RequestBody UserDto dto) {
-        User savedUser = userService.register(dto);
-        return ResponseEntity.ok(savedUser);
+        boolean isUserSaved = userService.register(dto);
+        if (!isUserSaved) {
+            return ResponseEntity.status(400).build();
+        }
+        return ResponseEntity.status(201).build();
     }
 
     @PostMapping("/login")
@@ -47,7 +53,7 @@ public class AuthController {
     }
 
     // ✅ Vérifie la validité du token
-    @PostMapping("/me")
+    @GetMapping("/me")
     public ResponseEntity<Map<String, Object>> me(@AuthenticationPrincipal UserDetails userDetails) {
         if (userDetails == null) {
             return ResponseEntity.status(401).body(Map.of("error", "Invalid or missing token"));
