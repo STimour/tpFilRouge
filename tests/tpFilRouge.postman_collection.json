@@ -42,9 +42,9 @@
 					"raw": "{\n  \"username\": \"tim\",\n  \"password\": \"azerty\"\n}\n"
 				},
 				"url": {
-					"raw": "{{baseUrl}}/auth/register",
+					"raw": "http://localhost:8080/api/auth/register",
 					"host": [
-						"{{baseUrl}}"
+						"http://localhost:8080/api"
 					],
 					"path": [
 						"auth",
@@ -99,9 +99,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/auth/login",
+					"raw": "http://localhost:8080/api/auth/login",
 					"host": [
-						"{{baseUrl}}"
+						"http://localhost:8080/api"
 					],
 					"path": [
 						"auth",
@@ -140,9 +140,9 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/auth/me",
+					"raw": "http://localhost:8080/api/auth/me",
 					"host": [
-						"{{baseUrl}}"
+						"http://localhost:8080/api"
 					],
 					"path": [
 						"auth",
@@ -197,9 +197,9 @@
 					"raw": "{\n  \"content\": \"Mon premier post automatisé 🚀\"\n}\n"
 				},
 				"url": {
-					"raw": "{{baseUrl}}/posts",
+					"raw": "http://localhost:8080/api/posts",
 					"host": [
-						"{{baseUrl}}"
+						"http://localhost:8080/api"
 					],
 					"path": [
 						"posts"
@@ -237,9 +237,9 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/posts/{{postId}}/like",
+					"raw": "http://localhost:8080/api/posts/{{postId}}/like",
 					"host": [
-						"{{baseUrl}}"
+						"http://localhost:8080/api"
 					],
 					"path": [
 						"posts",
@@ -282,9 +282,9 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/auth/logout",
+					"raw": "http://localhost:8080/api/auth/logout",
 					"host": [
-						"{{baseUrl}}"
+						"http://localhost:8080/api"
 					],
 					"path": [
 						"auth",
